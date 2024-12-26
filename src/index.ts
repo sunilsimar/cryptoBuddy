@@ -28,7 +28,6 @@ export interface User {
 export const userData: { [key: number]: User } = {};
 
 app.post('/webhook', async (req, res) => {
-    console.log('Incoming request:', req.body); // Log the entire request body
 
     const message = req.body.message;
 
@@ -37,8 +36,6 @@ app.post('/webhook', async (req, res) => {
         const messageText = message.text.toLowerCase();
         const firstName = message.chat.first_name;
 
-        console.log('Chat ID:', chatId); // Log the chat ID
-        console.log('Message Text:', messageText); // Log the message text
 
         if (messageText === '/start') {
             const options = {
