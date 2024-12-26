@@ -27,26 +27,6 @@ export interface User {
 
 export const userData: { [key: number]: User } = {};
 
-
-// Handle incoming messages
-// app.post('/webhook', (req, res) => {
-
-//     const message = req.body.message;
-
-//     if (message && message.chat && message.chat.id && message.text) {
-//         const chatId = message.chat.id;
-//         const messageText = message.text;
-
-//         if (messageText === 'Hello') {
-//             bot.sendMessage(chatId, 'Hello, I am your bot!');
-//         }
-//     } else {
-//         console.error('Invalid message format:', req.body); // Log invalid message format
-//     }
-
-//     res.sendStatus(200); // Acknowledge receipt
-// });
-
 app.post('/webhook', async (req, res) => {
     console.log('Incoming request:', req.body); // Log the entire request body
 
@@ -54,7 +34,8 @@ app.post('/webhook', async (req, res) => {
 
     if (message && message.chat && message.chat.id && message.text) {
         const chatId = message.chat.id;
-        const messageText = message.text;
+        const messageText = message.text.toLowerCase();
+        const firstName = message.chat.first_name;
 
         console.log('Chat ID:', chatId); // Log the chat ID
         console.log('Message Text:', messageText); // Log the message text
@@ -87,8 +68,8 @@ To buy a token: enter a ticker, token address, or URL from pump.fun, Birdeye, DE
 For more info on your wallet and to export your seed phrase, tap "Wallet" below.`,
                 { ...options, parse_mode: 'Markdown' }
             );
-        } else if (messageText === 'Hello') {
-            bot.sendMessage(chatId, "hello creator sunil here");
+        }else if (['hello', 'hey', 'good morning', 'good evening', 'good night'].includes(messageText)) {
+            bot.sendMessage(chatId, `Hey ${firstName}, how can I assist you with your trading today?`);
         } else if (messageText === 'Wallet') {
             if (!userData[chatId]) {
                 userData[chatId] = {};
