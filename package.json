@@ -1,10 +1,10 @@
 {
   "name": "bonkbot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/bot.js",
   "scripts": {
     "build": "tsc",
-    "start": "node bot.js",
+    "start": "node dist/bot.js",
     "dev": "ts-node src/bot.ts"
   },
   "keywords": [],
