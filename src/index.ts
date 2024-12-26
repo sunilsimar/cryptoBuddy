@@ -13,12 +13,12 @@ const token = process.env.TOKEN;
 if (!token) {
     throw new Error("Bot token is not defined in the environment variables.");
 }
-// const bot = new TelegramBot(token);
+const bot = new TelegramBot(token);
 
 // Set up the webhook URL
-// const TELEGRAM_WEBHOOK_URL = 'http://localhost:3000/webhook';
-// bot.setWebHook(TELEGRAM_WEBHOOK_URL);
-// 
+const TELEGRAM_WEBHOOK_URL = 'https://cryptobuddy-ngpz.onrender.com/webhook';
+bot.setWebHook(TELEGRAM_WEBHOOK_URL);
+
 
 export interface User {
     walletAddress?: string;
@@ -36,7 +36,7 @@ app.post('/webhook', (req, res) => {
 
     // Example reply
     if (messageText === 'Hello') {
-        // bot.sendMessage(chatId, 'Hello, I am your bot!');
+        bot.sendMessage(chatId, 'Hello, I am your bot!');
     }
 
     res.sendStatus(200); // Acknowledge receipt
