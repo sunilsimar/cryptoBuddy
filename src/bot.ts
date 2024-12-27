@@ -113,13 +113,13 @@
 //             // Send message with markdown formatting
 //             await bot.sendMessage(chatId, message, {
 //                 parse_mode: 'Markdown',
-//                 // Add custom keyboard markup if needed
-//                 // reply_markup: {
-//                 //     keyboard: [
-//                 //         [{ text: '💰 Check Balance' }, { text: '📥 Deposit' }, { text: '📤 Withdraw' }]
-//                 //     ],
-//                 //     resize_keyboard: true
-//                 // }
+//                reply_markup: {
+//                 inline_keyboard: [
+//                     [
+//                         { text: 'View on Solscan', url: `https://solscan.io/account/${walletAddress}` },
+//                     ],
+//                 ],
+//             }
 //         });
 
 //     await bot.answerCallbackQuery(callbackQuery.id);
@@ -137,15 +137,15 @@
 //         // Send message with markdown formatting
 //         await bot.sendMessage(chatId, message, {
 //             parse_mode: 'Markdown',
-//             // Add custom keyboard markup if needed
-//             // reply_markup: {
-//             //     keyboard: [
-//             //         [{ text: '💰 Check Balance' }, { text: '📥 Deposit' }, { text: '📤 Withdraw' }]
-//             //     ],
-//             //     resize_keyboard: true
-//             // }
+//            reply_markup: {
+//             inline_keyboard: [
+//                 [
+//                     { text: 'View on Solscan', url: `https://solscan.io/account/${walletAddress}` },
+//                 ],
+//             ],
+//         }
          
-//         });
+//     });
 //         await bot.answerCallbackQuery(callbackQuery.id);
 //         }
 

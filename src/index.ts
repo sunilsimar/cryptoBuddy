@@ -73,16 +73,41 @@ For more info on your wallet and to export your seed phrase, tap "Wallet" below.
             }
             let walletAddress = userData[chatId].walletAddress;
             if (walletAddress) {
-                const balance = await getBalance(walletAddress);
-                bot.sendMessage(chatId, `your wallet address is: ${userData[chatId].walletAddress} and your balance is ${balance} SOL`);
+                const balance = await getBalance(walletAddress); // Your getBalance function
+                            const message = `*Your Wallet:*\n\n` +
+                                `*Address:* \`${walletAddress}\`\n` +
+                                `*Balance:* ${balance.toFixed(9)} SOL\n\n` +
+                                `_Tap to copy the address and send SOL to deposit._`;
+                              await bot.sendMessage(chatId, message, {
+                                    parse_mode: 'Markdown',
+                                   reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: 'View on Solscan', url: `https://solscan.io/account/${walletAddress}` },
+                                        ],
+                                    ],
+                                }
+                    });
+                
             } else {
                 const { walletAddress, seedPhrase } = await createWallet();
                 userData[chatId].walletAddress = walletAddress;
                 userData[chatId].seedPhrase = seedPhrase;
-                const balance = await getBalance(walletAddress);
-                setTimeout(() => {
-                    bot.sendMessage(chatId, `your wallet address is: ${walletAddress} and your balance is ${balance} SOL`);
-                }, 100);
+                const balance = await getBalance(walletAddress); // Your getBalance function
+                const message = `*Your Wallet:*\n\n` +
+                    `*Address:* \`${walletAddress}\`\n` +
+                    `*Balance:* ${balance.toFixed(9)} SOL\n\n` +
+                    `_Tap to copy the address and send SOL to deposit._`;
+                await bot.sendMessage(chatId, message, {
+                                    parse_mode: 'Markdown',
+                                   reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: 'View on Solscan', url: `https://solscan.io/account/${walletAddress}` },
+                                        ],
+                                    ],
+                                }
+                    });
             }
         } else if (messageText == "Export Seed Phrase") {
             if (!userData[chatId]) {
