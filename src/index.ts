@@ -137,11 +137,16 @@ For more info on your wallet and to export your seed phrase, tap "Wallet" below.
                     `*Address:* \`${walletAddress}\`\n` +
                     `*Balance:* ${balance.toFixed(9)} SOL\n\n` +
                     `_Tap to copy the address and send SOL to deposit._`;
-
-                // Send message with markdown formatting
                 await bot.sendMessage(chatId, message, {
-                    parse_mode: 'Markdown',
-                });
+                                    parse_mode: 'Markdown',
+                                   reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: 'View on Solscan', url: `https://solscan.io/account/${walletAddress}` },
+                                        ],
+                                    ],
+                                }
+                    });
 
                 // Answer the callback query to stop the button from blinking
                 await bot.answerCallbackQuery(callbackQuery.id);
@@ -149,16 +154,21 @@ For more info on your wallet and to export your seed phrase, tap "Wallet" below.
                 const { walletAddress, seedPhrase } = await createWallet(); // Your createWallet function
                 userData[chatId].walletAddress = walletAddress;
                 userData[chatId].seedPhrase = seedPhrase;
-                const balance = await getBalance(walletAddress);
+                const balance = await getBalance(walletAddress); // Your getBalance function
                 const message = `*Your Wallet:*\n\n` +
                     `*Address:* \`${walletAddress}\`\n` +
                     `*Balance:* ${balance.toFixed(9)} SOL\n\n` +
                     `_Tap to copy the address and send SOL to deposit._`;
-
-                // Send message with markdown formatting
                 await bot.sendMessage(chatId, message, {
-                    parse_mode: 'Markdown',
-                });
+                                    parse_mode: 'Markdown',
+                                   reply_markup: {
+                                    inline_keyboard: [
+                                        [
+                                            { text: 'View on Solscan', url: `https://solscan.io/account/${walletAddress}` },
+                                        ],
+                                    ],
+                                }
+                    });
                 await bot.answerCallbackQuery(callbackQuery.id);
             }
         } else if (action === 'fund') {
